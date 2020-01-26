@@ -42,8 +42,10 @@ let write_output = function(file_path){
     return read_file(file_path)
        .then(output =>{
         write_file(file_path,Buffer.from(JSON.stringify(output)))
+           let path_pass = file_path.split('/')
+           process.argv.push(path_pass[path_pass.length - 1])
            return output
        }).catch(err=>{console.log(err)})
 }
-write_output(`${__dirname}/data/test.json`);
+// write_output(`${__dirname}/data/test.json`);
 module.exports = {read_file,write_output}

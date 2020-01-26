@@ -2,7 +2,7 @@
 
 const file_method = require('../../edit-file');
 
-const path = `${__dirname}../../data/person.json`
+const path = './data/person.json'
 // const path_require = require('path');
 
 describe('module open file',()=>{
