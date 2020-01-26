@@ -45,5 +45,5 @@ let write_output = function(file_path){
            return output
        }).catch(err=>{console.log(err)})
 }
-// write_output(`${__dirname}/data/person.json`);
+write_output(`${__dirname}/data/test.json`);
 module.exports = {read_file,write_output}
