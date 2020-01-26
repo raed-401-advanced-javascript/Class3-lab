@@ -13,28 +13,37 @@ let write_file = util.promisify(file_system.writeFile);
 
 
 let name = process.argv
-console.log(name)
+// console.log(name)
 
-let output_of_read = function (file_path){
+let read_file = function (file_path){
     return read_the_file(file_path)
       .then(data =>{
-          return data.toString().trim();      
-      })
-      .then(data =>{
-          console.log(write_file(data,'change'))
-
-      })
-      .catch(err =>{console.error(err)})
+          data = data.toString().trim()      
+          let output_json = JSON.parse(data)
+          output_json.firstName = 'raed'
+          output_json.kids = 3
+          // console.log(output_json)
+          return output_json
+      // }).then(data =>{
+      //   return write_file(file_path,Buffer.from(data))
+      //   .then(output=>{
+      //     console.log(output)
+      //     return output
+        }).catch(err =>{console.error(err)})
+      // }).catch(err =>{console.error(err)})
+  
+     
       
 }
+// read_file(file_path)
 
-let final_read = output_of_read(file_path)
-let write_output = function(final_read,data){
-    return write_file(final_read,data)
+
+let write_output = function(file_path){
+    return read_file(file_path)
        .then(output =>{
-           console.log(output);
+        write_file(file_path,Buffer.from(JSON.stringify(output)))
            return output
        }).catch(err=>{console.log(err)})
 }
-write_output(`${__dirname}/data/person.json`,'5');
-module.exports = {output_of_read ,write_output};
+// write_output(`${__dirname}/data/person.json`);
+module.exports = {read_file,write_output}
